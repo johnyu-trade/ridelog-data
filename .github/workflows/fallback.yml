@@ -1,0 +1,30 @@
+name: 保底預報
+on:
+  schedule:
+    - cron: '53 17 * * *'   # 台北 01:53
+    - cron: '13 22 * * *'   # 台北 06:13
+    - cron: '43 4 * * *'    # 台北 12:43
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fallback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 產生保底版
+        run: python3 scripts/fallback.py
+      - name: 檢查正式版今天有沒有發布
+        run: |
+          TODAY=$(TZ=Asia/Taipei date +%F)
+          D=$(python3 -c "import json;print(json.load(open('forecast.json')).get('date',''))")
+          echo "正式版日期 $D，今天 $TODAY"
+          if [ "$D" != "$TODAY" ]; then echo "::warning::正式預報今天沒有發布，App 會改用保底版"; fi
+      - name: 上傳
+        run: |
+          git config user.name "fallback-bot"
+          git config user.email "fallback-bot@users.noreply.github.com"
+          git add fallback.json
+          git diff --cached --quiet && exit 0
+          git commit -m "保底預報 $(TZ=Asia/Taipei date +%F)"
+          git pull --rebase origin main && git push origin HEAD:main
