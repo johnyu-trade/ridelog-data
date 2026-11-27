@@ -45,7 +45,7 @@ try:
     rain = "可能下雨" if rmax >= 60 else ("偶有零星雨" if rmax >= 30 else "降雨機會低")
     weather = {"text": "雙北%s，%d–%d 度" % (rain, round(min(temps)), round(max(temps))),
                "rain": rain, "temp": "%d–%d°" % (round(min(temps)), round(max(temps))),
-               "slots": slots, "demand": "下雨時短程需求通常增加" if rmax >= 60 else "需求主要看通勤時段",
+               "slots": slots,
                "conf": "估（數值模式）", "src": "Open-Meteo 數值預報（保底版）"}
 except Exception as e:
     print("weather failed:", e, file=sys.stderr)
