@@ -1,5 +1,5 @@
 """保底版預報：AI 正式版沒發布時，App 改讀 fallback.json。
-只放天氣（Open-Meteo）與一般通勤經驗規則，不寫任何活動、散場、交管。"""
+只放天氣（Open-Meteo 數值），不放任何熱區。"""
 import json, urllib.request, datetime, sys
 TZ = datetime.timezone(datetime.timedelta(hours=8))
 now = datetime.datetime.now(TZ)
@@ -50,30 +50,14 @@ try:
 except Exception as e:
     print("weather failed:", e, file=sys.stderr)
 
-wet = bool(weather) and any(max(s["tp"], s["nt"]) >= 60 for s in weather["slots"])
-P = lambda s, e, t, pl, ar, m, b, nav, why: {"start": s, "end": e, "title": t, "place": pl, "areas": ar, "main": m, "backup": b,
-        "arrive_by": s, "nav": nav, "conf": "推測", "why": why}
-peaks = []
-if wd < 5:
-    peaks.append(P("07:30", "09:30", "上班尖峰" + ("（雨）" if wet else ""), "住宅區→市區", ["三重", "新莊", "板橋", "中和", "永和"],
-                   "住宅區往台北市區", "捷運站周邊短程", "台北車站", "平日通勤經驗規則"))
-    peaks.append(P("17:00", "19:30", "下班尖峰" + ("（雨）" if wet else ""), "信義區", ["信義", "內湖", "中山"],
-                   "信義區、內湖科技園區", "南京東路商圈", "台北101", "平日下班經驗規則"))
-    if wd == 4:
-        peaks.append(P("21:30", "01:00", "週五夜歸", "東區", ["大安", "信義", "中山"],
-                       "東區、信義、林森北路", "台北車站", "忠孝敦化站", "週五聚餐夜歸經驗規則"))
-else:
-    peaks.append(P("11:00", "14:00", "假日商圈", "信義區", ["信義", "大安", "中正"],
-                   "信義、東區、西門", "台北車站", "台北101", "假日出遊經驗規則"))
-    peaks.append(P("21:00", "00:30", "假日夜歸", "東區", ["大安", "信義", "中山"],
-                   "東區、信義、林森北路", "西門町", "忠孝敦化站", "假日夜歸經驗規則"))
+peaks = []  # 規則 R4：保底版只放天氣，不放任何沒有公開來源的熱區
 
 try:
     venues = json.load(open("forecast.json", encoding="utf-8")).get("venues", [])
 except Exception:
     venues = []
 out = {"version": 1, "kind": "fallback", "date": today, "generated": now.isoformat(timespec="seconds"),
-       "status": "fallback", "status_note": "保底版：只有天氣與一般尖峰，沒有活動資訊",
+       "status": "fallback", "status_note": "今日熱區預報尚未發布，只顯示天氣",
        "weather": weather, "peaks": peaks, "upcoming": [], "venues": venues}
 if weather is None:
     del out["weather"]
