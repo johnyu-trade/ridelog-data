@@ -9,8 +9,23 @@ wd = now.weekday()  # 0=Mon
 def om(lat, lon):
     u = ("https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s"
          "&hourly=precipitation_probability,temperature_2m&timezone=Asia%%2FTaipei&forecast_days=1") % (lat, lon)
-    with urllib.request.urlopen(u, timeout=20) as r:
-        h = json.load(r)["hourly"]
+    import time, subprocess
+    last = None
+    for i in range(4):
+        try:
+            with urllib.request.urlopen(u, timeout=40) as r:
+                h = json.load(r)["hourly"]
+            break
+        except Exception as e:
+            last = e
+            try:  # 改用 curl 再試
+                h = json.loads(subprocess.check_output(["curl", "-sS", "--retry", "2", "-m", "40", u]))["hourly"]
+                break
+            except Exception as e2:
+                last = e2
+            time.sleep(10 * (i + 1))
+    else:
+        raise last
     return h["time"], h["precipitation_probability"], h["temperature_2m"]
 
 weather = None
