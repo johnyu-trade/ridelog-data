@@ -1,65 +1,73 @@
 {
- "version": 1,
- "date": "2026-11-27",
- "generated": "2026-11-27T17:05:00+08:00",
+ "version": 2,
+ "date": "2026-11-28",
+ "generated": "2026-11-28T02:20:00+08:00",
  "status": "reviewed",
- "status_note": "Claude×GPT 已覆核（每項皆有公開來源）",
+ "status_note": "已由 Claude 與 GPT 交叉查證",
  "weather": {
-  "text": "北部偶有零星短暫雨，苗栗以北高溫約 24–25°C，中部以北早晚約 18–19°C",
-  "rain": "偶有零星雨",
-  "temp": "18–25°",
-  "conf": "已查證",
-  "src": "NOWnews 引中央氣象署 2026/11/27",
-  "src_url": "https://www.nownews.com/news/6895880"
+  "text": "雙北降雨機會低，15–23 度",
+  "rain": "降雨機會低",
+  "temp": "15–23°",
+  "slots": [
+   {
+    "t": "白天",
+    "tp": 0,
+    "nt": 0
+   },
+   {
+    "t": "晚上",
+    "tp": 0,
+    "nt": 0
+   }
+  ],
+  "conf": "估（數值模式）",
+  "src": "Open-Meteo 數值預報（保底版）"
  },
  "peaks": [
   {
-   "start": "17:00",
-   "end": "20:00",
-   "arrive_by": "17:00",
-   "title": "高鐵返鄉超尖峰",
-   "place": "高鐵台北站",
-   "areas": [
-    "中正",
-    "南港",
-    "板橋"
-   ],
-   "kind": "人潮觀察",
-   "fact": "高鐵 11/17 公布：今天 15:00 後訂票率 82%；17–20 點超尖峰，南港、台北、板橋三站自由座閘門管制",
-   "src_name": "台灣高鐵公告",
-   "src_url": "https://www.thsrc.com.tw/ArticleContent/e3f09805-2f5a-4f57-ae40-d5751e5128cd",
-   "nav": "台灣高鐵台北站",
-   "conf": "已查證",
-   "review": "PASS"
-  },
-  {
-   "start": "19:30",
-   "end": "19:30",
-   "arrive_by": "19:30",
-   "title": "Zepp 演唱會",
-   "place": "Zepp New Taipei",
-   "areas": [
-    "新莊"
-   ],
+   "id": "P1",
    "kind": "活動資訊",
-   "fact": "Karencici The Loser Concert 19:30 開演，散場未公布",
-   "src_name": "Zepp 官方",
-   "src_url": "https://www.zepp.co.jp/hall/newtaipei/",
-   "nav": "Zepp New Taipei",
-   "conf": "已查證",
-   "review": "PASS"
+   "start": "18:00",
+   "end": null,
+   "title": "MAMAMOO 演唱會",
+   "place": "台北小巨蛋",
+   "areas": [
+    "松山"
+   ],
+   "nav": "台北小巨蛋",
+   "fact": "MAMAMOO 台北場 11/28（六）18:00 於台北小巨蛋開演",
+   "src_name": "HK01",
+   "src_url": "https://global.hk01.com/众乐迷/60390177/mamamoo演唱会2026台北-门票攻略-购票连结-座位表",
+   "src_excerpt": "演唱会日期：2026 年11月 28日（六）、11月29日（日） 演唱会时间：6PM（六）/3PM（日） 演唱会地点：台北小巨蛋",
+   "published_at": "2026-09",
+   "event_date": "2026-11-28",
+   "conf": "已查證"
   }
  ],
  "upcoming": [
   {
    "date": "2026-11-28",
-   "text": "凌晨：高鐵紅眼班最晚北上 01:27 抵台北、01:35 抵南港。白天投票 08:00–16:00。小巨蛋 MAMAMOO 18:00 開演、預計 21:00 結束；大巨蛋 F✦FOREVER（市府列活動時段 16:00–22:00）。",
-   "conf": "已查證（高鐵、中選會、小巨蛋、北市交通局）"
+   "text": "九合一選舉投票 08:00–16:00",
+   "src_name": "中選會",
+   "src_url": "https://www.ey.gov.tw/File/353306FCE9CBA968?A=C",
+   "src_excerpt": "115年11月28日（星期六） 上午8時至下午4時",
+   "conf": "已查證"
+  },
+  {
+   "date": "2026-11-28",
+   "text": "高鐵 11/28 中午12點前加開8班全車自由座列車（南下4班、北上4班；商務車廂除外）",
+   "src_name": "台灣高鐵",
+   "src_url": "https://www.thsrc.com.tw/ArticleContent/e3f09805-2f5a-4f57-ae40-d5751e5128cd",
+   "src_excerpt": "11/28並首次在週六中午 12時以前，加開多達8班（南下4班、北上4班）全車自由座列車（商務車廂除外）",
+   "conf": "已查證"
   },
   {
    "date": "2026-11-29",
-   "text": "小巨蛋 MAMAMOO 15:00 開演、預計 18:00 結束；大巨蛋 F✦FOREVER 第二天。",
-   "conf": "已查證（小巨蛋、北市交通局）"
+   "text": "MAMAMOO 台北小巨蛋 15:00 開演",
+   "src_name": "HK01",
+   "src_url": "https://global.hk01.com/众乐迷/60390177/mamamoo演唱会2026台北-门票攻略-购票连结-座位表",
+   "src_excerpt": "演唱会时间：6PM（六）/3PM（日）",
+   "conf": "已查證"
   }
  ],
  "venues": [
@@ -82,7 +90,7 @@
  ],
  "review": {
   "by": "Claude×GPT",
-  "at": "2026-11-27T17:05:00+08:00",
-  "result": "W/P1/P2/P3/U1 全部 PASS（第 2 次覆核）"
+  "at": "2026-11-28T02:20:00+08:00",
+  "result": "PASS 5／刪除 0（第一輪 PASS 2、REVISE 3，修正後複審全 PASS）"
  }
 }
